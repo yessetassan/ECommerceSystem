@@ -55,6 +55,14 @@ public class CustomerService {
                 .orElseThrow(() -> new CustomerNotFoundException(String.format("No customer found with the provided ID: %s", id)));
     }
 
+    public CustomerResponse findByIdMic(String id) {
+        return this.repository.findById(id)
+                .map(mapper::fromCustomer)
+                .orElse(null);
+    }
+
+
+
     public boolean existsById(String id) {
         return this.repository.findById(id)
                 .isPresent();
