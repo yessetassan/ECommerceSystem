@@ -1,0 +1,22 @@
+spring:
+  liquibase:
+    change-log: db/main-data.xml
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/order
+    username: postgres
+    password: Qasaqayj7
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8070
+
+application:
+  config:
+    customer_url: http://localhost:8090/api/customers
+    product_url: http://localhost:8222/api/products
+    payment_url: http://localhost:8222/api/payments
+
