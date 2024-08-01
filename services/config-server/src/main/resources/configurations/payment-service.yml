@@ -1,16 +1,14 @@
 server:
-  port: 8070
+  port: 8060
 spring:
-  liquibase:
-    change-log: db/main-data.xml
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/order
+    url: jdbc:postgresql://localhost:5432/payment
     username: postgres
     password: Qasaqayj7
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   kafka:
@@ -19,11 +17,10 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: orderConfirmation:com.yesko.project.kafka.OrderConfirmation
+        spring.json.type.mapping: paymentConfirmation:com.yesko.payment.notification.PaymentNotificationRequest
 application:
   config:
     customer_url: http://localhost:8222/api/customers
     product_url: http://localhost:8222/api/products
     payment_url: http://localhost:8222/api/payments
     product-url: http://localhost:8222/api/products
-
