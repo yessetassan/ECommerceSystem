@@ -1,13 +1,14 @@
-package com.yesko.notification.kafka.payment;
+package com.yesko.payment.notification;
 
-import lombok.*;
+import com.yesko.payment.payment.PaymentMethod;
+import lombok.Builder;
+import lombok.Data;
 
 import java.math.BigDecimal;
+
 @Builder
-@Getter
-@Setter
-@ToString
-public class PaymentConfirmation {
+@Data
+public class PaymentNotificationRequest {
     String orderReference;
     BigDecimal amount;
     PaymentMethod paymentMethod;

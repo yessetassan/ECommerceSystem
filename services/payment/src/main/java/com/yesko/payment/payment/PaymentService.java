@@ -5,7 +5,6 @@ import com.yesko.payment.dto.payment.PaymentRequest;
 import com.yesko.payment.dto.payment.PaymentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 

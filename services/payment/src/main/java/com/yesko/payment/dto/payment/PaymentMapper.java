@@ -2,14 +2,9 @@ package com.yesko.payment.dto.payment;
 
 import com.yesko.payment.payment.Payment;
 import lombok.*;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Getter
-@Setter
-@Service
+@Component
 public class PaymentMapper {
     public PaymentResponse toPaymentResponse(Payment payment) {
         return PaymentResponse.builder()

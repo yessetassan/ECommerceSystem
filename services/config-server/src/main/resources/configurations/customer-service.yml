@@ -1,3 +1,5 @@
+server:
+  port: 8090
 spring:
   data:
     mongodb:
@@ -7,5 +9,3 @@ spring:
       database: demo
       port: 27017
       host: localhost
-server:
-  port: 8090
