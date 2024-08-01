@@ -1,5 +1,7 @@
 package com.yesko.project.order;
 
+import com.yesko.project.dto.order.OrderCreateRequest;
+import com.yesko.project.dto.order.OrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     private final OrderService service;
     @PostMapping
-    public ResponseEntity<Integer> createOrder(
-            @RequestBody @Valid OrderRequest request
+    public ResponseEntity<OrderResponse> createOrder(
+            @RequestBody @Valid OrderCreateRequest request
     ){
         return ResponseEntity.ok().body(service.createOrder(request));
     }
-
 
 }

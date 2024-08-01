@@ -1,6 +1,8 @@
 package com.yesko.project.order;
 
-public enum PaymentMethod {
+import java.io.Serializable;
+
+public enum PaymentMethod implements Serializable {
 
     PAYPAL,
     CREDIT_CARD,
