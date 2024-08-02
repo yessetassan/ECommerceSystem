@@ -22,12 +22,12 @@ public class CustomerMapper {
         if (customer == null) {
             return null;
         }
-        return CustomerResponse.builder()
-                .id(customer.getId())
-                .firstname(customer.getFirstname())
-                .lastname(customer.getLastname())
-                .email(customer.getEmail())
-                .address(customer.getAddress())
-                .build();
+        return new CustomerResponse(
+                customer.getId(),
+                customer.getFirstname(),
+                customer.getLastname(),
+                customer.getEmail(),
+                customer.getAddress()
+        );
     }
 }

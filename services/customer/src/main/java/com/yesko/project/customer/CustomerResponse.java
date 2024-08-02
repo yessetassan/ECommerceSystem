@@ -1,14 +1,11 @@
 package com.yesko.project.customer;
 
-import lombok.Builder;
-import lombok.Data;
+public record CustomerResponse(
+        String id,
+        String firstname,
+        String lastname,
+        String email,
+        Address address
+) {
 
-@Builder
-@Data
-public class CustomerResponse {
-    String id;
-    String firstname;
-    String lastname;
-    String email;
-    Address address;
 }
