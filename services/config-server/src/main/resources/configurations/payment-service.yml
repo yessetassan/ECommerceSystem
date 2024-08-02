@@ -1,6 +1,8 @@
 server:
   port: 8060
 spring:
+  liquibase:
+    change-log: db/main-data.xml
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/payment

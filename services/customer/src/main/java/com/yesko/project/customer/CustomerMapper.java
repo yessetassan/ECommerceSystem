@@ -10,15 +10,15 @@ public class CustomerMapper {
             return null;
         }
         return Customer.builder()
-                .id(request.id())
-                .firstname(request.firstname())
-                .lastname(request.lastname())
-                .email(request.email())
-                .address(request.address())
+                .id(request.getId())
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .address(request.getAddress())
                 .build();
     }
 
-    public CustomerResponse fromCustomer(Customer customer) {
+    public CustomerResponse toCustomerResponse(Customer customer) {
         if (customer == null) {
             return null;
         }

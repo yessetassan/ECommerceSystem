@@ -1,8 +1,12 @@
 package com.yesko.payment.dto.customer;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
+@Builder
+@Data
 public class Customer {
     String id;
     @NotNull(message = "Firstname is required")

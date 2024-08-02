@@ -16,48 +16,48 @@ public class CustomerService {
     private final CustomerRepository repository;
     private final CustomerMapper mapper;
 
-    public String createCustomer(CustomerRequest request) {
+    public CustomerResponse createCustomer(CustomerRequest request) {
         var customer = this.repository.save(mapper.toCustomer(request));
-        return customer.getId();
+        return mapper.toCustomerResponse(customer);
     }
 
     public void updateCustomer(CustomerRequest request) {
-        var customer = this.repository.findById(request.id())
+        var customer = this.repository.findById(request.getId())
                 .orElseThrow(() -> new CustomerNotFoundException(
-                        String.format("Cannot update customer:: No customer found with the provided ID: %s", request.id())
+                        String.format("Cannot update customer:: No customer found with the provided ID: %s", request.getId())
                 ));
         mergeCustomer(customer, request);
         this.repository.save(customer);
     }
 
     private void mergeCustomer(Customer customer, CustomerRequest request) {
-        if (StringUtils.isNotBlank(request.firstname())) {
-            customer.setFirstname(request.firstname());
+        if (StringUtils.isNotBlank(request.getFirstname())) {
+            customer.setFirstname(request.getFirstname());
         }
-        if (StringUtils.isNotBlank(request.email())) {
-            customer.setEmail(request.email());
+        if (StringUtils.isNotBlank(request.getEmail())) {
+            customer.setEmail(request.getEmail());
         }
-        if (request.address() != null) {
-            customer.setAddress(request.address());
+        if (request.getAddress() != null) {
+            customer.setAddress(request.getAddress());
         }
     }
 
     public List<CustomerResponse> findAllCustomers() {
         return  this.repository.findAll()
                 .stream()
-                .map(this.mapper::fromCustomer)
+                .map(this.mapper::toCustomerResponse)
                 .collect(Collectors.toList());
     }
 
     public CustomerResponse findById(String id) {
         return this.repository.findById(id)
-                .map(mapper::fromCustomer)
+                .map(mapper::toCustomerResponse)
                 .orElseThrow(() -> new CustomerNotFoundException(String.format("No customer found with the provided ID: %s", id)));
     }
 
     public CustomerResponse findByIdMic(String id) {
         return this.repository.findById(id)
-                .map(mapper::fromCustomer)
+                .map(mapper::toCustomerResponse)
                 .orElse(null);
     }
 

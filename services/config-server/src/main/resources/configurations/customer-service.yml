@@ -6,6 +6,6 @@ spring:
       authentication-database: admin
       username: admin
       password: password
-      database: demo
+      database: customer
       port: 27017
       host: localhost
