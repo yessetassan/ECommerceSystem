@@ -5,6 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <include file="/db/changelog/20240728_001_add_all_entities.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/20240803_001_add_all_entities.sql" relativeToChangelogFile="false"/>
     <include file="/db/changelog/20240728_002_add_data_category.sql" relativeToChangelogFile="false"/>
 </databaseChangeLog>
