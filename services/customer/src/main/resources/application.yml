@@ -1,22 +1,5 @@
 spring:
-  liquibase:
-    change-log: db/main-data.xml
-  jpa:
-    database: postgresql
-    show-sql: false
-    hibernate:
-      ddl-auto: update
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: Qasaqayj7
-    url: jdbc:postgresql://localhost:5432/customer
-##  application:
-##    name: customer-service
-#  config:
-#    import: optional:configserver:http://localhost:8888/
-jwt:
-  secret: 56e4rg64re654g65fg4rev6
-  lifetime: 10000000m
-
-
+  application:
+    name: customer-service
+  config:
+    import: optional:configserver:http://localhost:8888/

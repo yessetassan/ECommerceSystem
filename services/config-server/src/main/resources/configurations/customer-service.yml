@@ -1,17 +1,11 @@
 server:
   port: 8090
 spring:
-  jpa:
-    database: postgresql
-    show-sql: false
-    hibernate:
-      ddl-auto: update
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: Qasaqayj7
-    url: jdbc:postgresql://localhost:5432/customer
-
-jwt:
-  secret: 984hg493gh0439rthr0429uruj2309yh937gc763fe87t3f89723gf
-  lifetime: 10m
+  data:
+    mongodb:
+      authentication-database: admin
+      username: admin
+      password: password
+      database: customer
+      port: 27017
+      host: localhost
