@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface UserServiceImpl {
     void createNewUser(UserCreateRequest request);
+    void saveExistUser(User user, String newPassword);
     UserResponse selfLoad();
     Optional<User> findByUsername(String username);
     UserResponse findById(Integer id);
