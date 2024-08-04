@@ -14,13 +14,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    @GetMapping("/info")
-    public ResponseEntity<UserResponse> getUser() {
-        return ResponseEntity.ok().body(userService.selfLoad());
-    }
     @GetMapping
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok().body(userService.findAll());
+    }
+    @GetMapping("/self")
+    public ResponseEntity<UserResponse> getUser() {
+        return ResponseEntity.ok().body(userService.selfLoad());
     }
 
     @GetMapping("/{id}")

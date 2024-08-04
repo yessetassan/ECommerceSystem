@@ -59,7 +59,6 @@ public class UserService implements UserServiceImpl, UserDetailsService {
         return userMapper.toUserResponse((User) this.loadUserByUsername(username));
     }
 
-
     @Override
     public Optional<User> findByUsername(String username) {
         return repo.findByUsername(username);
