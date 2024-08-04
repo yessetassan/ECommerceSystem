@@ -22,7 +22,7 @@ spring:
         spring.json.type.mapping: orderConfirmation:com.yesko.project.kafka.OrderConfirmation
 application:
   config:
-    customer_url: http://localhost:8222/api/customers
+    customer_url: http://localhost:8222/api/users
     product_url: http://localhost:8222/api/products
     payment_url: http://localhost:8222/api/payments
     product-url: http://localhost:8222/api/products

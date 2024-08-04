@@ -10,13 +10,11 @@ import com.yesko.project.repo.UserRepo;
 import com.yesko.project.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +48,13 @@ public class UserService implements UserServiceImpl, UserDetailsService {
         repo.save(user);
 
         log.info("Создался новый ползователь :: {}", userMapper.toUserResponse(user));
+    }
+
+    @Override
+    public void saveExistUser(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        repo.save(user);
+        log.info("Пароль обновлялся для ползователья :: {}", userMapper.toUserResponse(user));
     }
 
     @Override

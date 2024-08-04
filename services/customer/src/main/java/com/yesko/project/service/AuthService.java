@@ -62,4 +62,16 @@ public class AuthService {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
+    @Transactional
+    public ResponseEntity<?> sentEmail(JwtRequest request) throws Exception {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        } catch (BadCredentialsException e) {
+            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
+        }
+        UserDetails userDetails = userService.loadUserByUsername(request.getUsername());
+        String token = jwtTokenUtils.generateToken(userDetails);
+        return ResponseEntity.ok(new JwtResponse(token));
+    }
+
 }

@@ -30,9 +30,8 @@ public class OrderService {
     private final OrderLineMapper orderLineMapper;
     @Transactional
     public OrderResponse createOrder(OrderCreateRequest request) {
-        var customer = this.customerClient.findCustomerById(request.getCustomerId());
+        var customer = this.customerClient.findCustomerByToken(request.getToken());
         log.info("Customer is {}", customer);
-
 //        var purchaseResponses = productClient.purchaseProducts(request.getPurchaseRequests());
 //
 //        var order = repository.save(mapper.toOrder(request));

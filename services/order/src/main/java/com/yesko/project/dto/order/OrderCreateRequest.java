@@ -17,9 +17,12 @@ import java.util.List;
 @Setter
 @Getter
 public class OrderCreateRequest implements Serializable {
-    @NotNull(message = "CustomerId should be not null")
-    @Positive(message = "CustomerId should be positive")
-    private Integer customerId;
+//    @NotNull(message = "CustomerId should be not null")
+//    @Positive(message = "CustomerId should be positive")
+//    private Integer customerId;
+    @NotEmpty(message = "Token should be not empty")
+    private String token;
+
 //    private String reference;
 //    @Positive(message = "Order amount should be positive")
 //    private BigDecimal totalAmount;
