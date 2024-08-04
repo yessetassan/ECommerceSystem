@@ -37,17 +37,22 @@ public class SecurityConfig  {
     private final JwtRequestFilter jwtRequestFilter;
     private final AuthenticationProvider authenticationProvider;
     private static final String[] WHITE_LIST_URL = {
-            "/open-api/users/**"
+            "/open-api/users/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-resources/*",
+            "/v3/api-docs/**"
     };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers(WHITE_LIST_URL)
+                        req
+                                .requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
                                 .anyRequest()
-                                .authenticated()
+                                .permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
