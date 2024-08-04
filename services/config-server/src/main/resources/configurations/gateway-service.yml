@@ -7,10 +7,10 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: customer-service
-          uri: lb:http://CUSTOMER-SERVICE
+        - id: user-service
+          uri: lb:http://USER-SERVICE
           predicates:
-            - Path=/api/customers/**
+            - Path=/open-api/users/**, /api/users/**
         - id: order-service
           uri: lb:http://ORDER-SERVICE
           predicates:

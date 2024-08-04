@@ -48,24 +48,24 @@ public class CustomerClient {
     private final RestTemplate restTemplate = new RestTemplate();
 
     @Transactional
-    public CustomerResponse findCustomerById(Integer customerId) {
+    public CustomerResponse findCustomerByToken(String token) {
         try {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.set(HttpHeaders.CONTENT_TYPE, APPLICATION_JSON_VALUE);
+            httpHeaders.setBearerAuth(token);
 
-            HttpEntity<List<PurchaseRequest>> requestEntity = new HttpEntity<>(null, httpHeaders);
+            HttpEntity<?> requestEntity = new HttpEntity<>(null, httpHeaders);
             ParameterizedTypeReference<CustomerResponse> responseType = new ParameterizedTypeReference<>() {
             };
             ResponseEntity<CustomerResponse> responseEntity = restTemplate.exchange(
-                    customerUrl + "/" + customerId,
+                    customerUrl + "/self",
                     HttpMethod.GET,
                     requestEntity,
                     responseType
             );
-            log.info("Good...");
             return responseEntity.getBody();
         }catch (Exception e) {
-            throw new BusinessException("An error occurred while getting customer with ID:: " + customerId);
+            throw new BusinessException("An error occurred while getting customer with token:: " + token);
         }
     }
 }

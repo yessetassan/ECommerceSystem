@@ -1,19 +1,15 @@
 package com.yesko.project.customer;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Builder
-@Getter
-@Setter
-@ToString
-public class CustomerResponse implements Serializable {
-    String id;
-    String firstname;
-    String lastname;
-    String email;
+@Data
+public class CustomerResponse {
+    private Integer id;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String email;
 }
