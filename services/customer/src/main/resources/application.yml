@@ -19,6 +19,7 @@ jwt:
   secret: 56e4rg64re654g65fg4rev6
   lifetime: 10000000m
 
+
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true
