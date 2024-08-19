@@ -21,5 +21,5 @@ public class OrderResponse implements Serializable {
     private String reference;
     private BigDecimal totalAmount;
     private PaymentMethod paymentMethod;
-    private Integer customerId;
+    private Integer userId;
 }

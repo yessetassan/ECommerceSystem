@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "t_product")
-public class Product implements Serializable {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

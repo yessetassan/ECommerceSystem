@@ -1,12 +1,12 @@
 spring:
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: yesset.assan@gmail.com
-    password: tnvqyiriqnefkzwt
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: yesset.assan@gmail.com
+#    password: tnvqyiriqnefkzwt
+#    properties:
+#      mail.smtp.auth: true
+#      mail.smtp.starttls.enable: true
   liquibase:
     change-log: db/main-data.xml
   jpa:
@@ -17,8 +17,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: Qasaqayj7
-    url: jdbc:postgresql://localhost:5432/customer
+    password: postgres
+    url: jdbc:postgresql://localhost:5440/user
 jwt:
   secret: 56e4rg64re654g65fg4rev6
   lifetime: 1m
@@ -26,3 +26,6 @@ jwt:
 springdoc:
   swagger-ui:
     disable-swagger-default-url: true
+
+server:
+  port: 8099

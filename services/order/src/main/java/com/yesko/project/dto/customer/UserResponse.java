@@ -1,15 +1,14 @@
-package com.yesko.user.dto.user;
+package com.yesko.project.dto.customer;
 
-import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
 
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class UserResponse {
     private Integer id;
     private String username;

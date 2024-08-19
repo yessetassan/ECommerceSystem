@@ -1,6 +1,6 @@
 package com.yesko.project.kafka;
 
-import com.yesko.project.dto.customer.CustomerResponse;
+import com.yesko.project.dto.customer.UserResponse;
 import com.yesko.project.dto.product.PurchaseResponse;
 import com.yesko.project.order.PaymentMethod;
 import lombok.Builder;
@@ -15,6 +15,6 @@ public class OrderConfirmation {
     String orderReference;
     BigDecimal totalAmount;
     PaymentMethod paymentMethod;
-    CustomerResponse customer;
+    UserResponse userResponse;
     List<PurchaseResponse> products;
 }

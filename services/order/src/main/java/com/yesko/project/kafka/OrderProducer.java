@@ -7,6 +7,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
+
+import static com.yesko.project.utils.Constanta.ORDER_TOPIC;
 import static org.springframework.kafka.support.KafkaHeaders.TOPIC;
 
 @Service
@@ -20,7 +22,7 @@ public class OrderProducer {
         log.info("Sending order confirmation");
         Message<OrderConfirmation> message = MessageBuilder
                 .withPayload(orderConfirmation)
-                .setHeader(TOPIC, "order-topic")
+                .setHeader(TOPIC, ORDER_TOPIC)
                 .build();
         kafkaTemplate.send(message);
     }

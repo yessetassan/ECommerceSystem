@@ -11,7 +11,8 @@ import java.math.BigDecimal;
 @Builder
 @Getter
 @Setter
-public class PurchaseResponse implements Serializable {
+@ToString
+public class PurchaseResponse implements Serializable{
     private Integer productId;
     private String name;
     private String description;

@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.type.internal.ParameterizedTypeImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -35,17 +32,28 @@ public class ProductClient {
         ParameterizedTypeReference<List<PurchaseResponse>> responseType = new ParameterizedTypeReference<>() {
         };
 
-        ResponseEntity<List<PurchaseResponse>> responseEntity = restTemplate.exchange(
-                productUrl + "/purchase",
-                HttpMethod.POST,
-                requestEntity,
-                responseType
-        );
-
-        if (responseEntity.getStatusCode().isError()) {
-            throw new BusinessException("An error occurred while processing the products purchase: " + responseEntity.getStatusCode());
+        ResponseEntity<List<PurchaseResponse>> responseEntity = null;
+        try {
+            responseEntity = restTemplate.exchange(
+                    productUrl + "/purchase",
+                    HttpMethod.POST,
+                    requestEntity,
+                    responseType
+            );
+        }catch (Exception e) {
+            String exceptionMessage = e.getMessage();
+            String errorMessage = extractErrorMessage(exceptionMessage);
+            throw new BusinessException(errorMessage);
         }
 
         return responseEntity.getBody();
+    }
+
+    public String extractErrorMessage(String exceptionMessage) {
+        int startIndex = exceptionMessage.indexOf("\"");
+        if (startIndex != -1) {
+            return exceptionMessage.substring(startIndex + 1, exceptionMessage.length() - 1);
+        }
+        return exceptionMessage;
     }
 }

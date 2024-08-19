@@ -21,7 +21,8 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_order")
 @Builder
-public class Order implements Serializable {
+@ToString
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +38,8 @@ public class Order implements Serializable {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @Column(name = "customer_id")
-    private Integer customerId;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @OneToMany(mappedBy = "order")
     private List<OrderLine> orderLines;

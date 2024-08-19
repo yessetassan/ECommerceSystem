@@ -5,7 +5,7 @@ import com.yesko.user.dto.user.JwtRequest;
 import com.yesko.user.dto.user.PasswordChangeRequest;
 import com.yesko.user.dto.user.UserCreateRequest;
 import com.yesko.user.service.AuthService;
-import com.yesko.user.service.EmailService;
+//import com.yesko.user.service.EmailService;
 import lombok.RequiredArgsConstructor;
 //import org.bouncycastle.jcajce.provider.symmetric.AES;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService service;
-    private final EmailService emailService;
+//    private final EmailService emailService;
     @PostMapping
     public ResponseEntity<?> createNewUser(
             @RequestBody UserCreateRequest request
@@ -36,11 +36,11 @@ public class AuthController {
         return ResponseEntity.ok().body(service.generateToken(request).getBody());
     }
 
-    @PostMapping("/email")
-    public ResponseEntity<?> sentEmail(
-            @RequestBody @Validated EmailRequest request
-    ) {
-        return ResponseEntity.ok().body(emailService.sentEmail(request).getBody());
-    }
+//    @PostMapping("/email")
+//    public ResponseEntity<?> sentEmail(
+//            @RequestBody @Validated EmailRequest request
+//    ) {
+//        return ResponseEntity.ok().body(emailService.sentEmail(request).getBody());
+//    }
 
 }

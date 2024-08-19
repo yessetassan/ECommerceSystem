@@ -4,7 +4,7 @@ CREATE TABLE t_order (
                         reference VARCHAR(255) UNIQUE NOT NULL,
                         total_amount NUMERIC(19,2),
                         payment_method VARCHAR(50),
-                        customer_id INTEGER,
+                        user_id INTEGER,
                         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                         last_modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

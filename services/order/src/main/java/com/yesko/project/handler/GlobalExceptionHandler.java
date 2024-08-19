@@ -30,11 +30,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErrorResponse> handle(BusinessException exp) {
-        var errors = new HashMap<String, String>();
-        errors.put("message", exp.getMessage());
+    public ResponseEntity<?> handle(BusinessException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(new ErrorResponse(errors));
+                .body(exp.getMessage());
     }
 }

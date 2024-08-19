@@ -16,12 +16,10 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProductPurchaseException.class)
-    public ResponseEntity<ErrorResponse> handle(ProductPurchaseException exp) {
-        var error = new HashMap<String, String>();
-        error.put("message", exp.getMessage());
+    public ResponseEntity<String> handle(ProductPurchaseException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(new ErrorResponse(error));
+                .body(exp.getMessage());
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

@@ -1,9 +1,10 @@
 package com.yesko.project.dto.order;
 
+import com.yesko.project.dto.customer.UserResponse;
 import com.yesko.project.order.Order;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Component
@@ -14,20 +15,19 @@ public class OrderMapper {
                 .reference(order.getReference())
                 .totalAmount(order.getTotalAmount())
                 .paymentMethod(order.getPaymentMethod())
-                .customerId(order.getCustomerId())
+                .userId(order.getUserId())
                 .build();
     }
 
-    public Order toOrder(OrderCreateRequest request) {
+    public Order toOrder(OrderCreateRequest request, UserResponse user, BigDecimal totalAmount) {
         if (request == null) return null;
-        return null;
-//        return Order.builder()
-//                .id(null)
-//                .reference(request.getReference())
-//                .totalAmount(request.getTotalAmount())
-//                .paymentMethod(request.getPaymentMethod())
-//                .customerId(request.getCustomerId())
-//                .createdAt(LocalDateTime.now())
-//                .build();
+        return Order.builder()
+                .id(null)
+                .reference(request.getReference())
+                .totalAmount(totalAmount)
+                .paymentMethod(request.getPaymentMethod())
+                .userId(user.getId())
+                .createdAt(LocalDateTime.now())
+                .build();
     }
 }

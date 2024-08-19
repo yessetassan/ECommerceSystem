@@ -2,6 +2,7 @@ package com.yesko.notification.kafka;
 
 
 import com.yesko.notification.dto.email.EmailMapper;
+//import com.yesko.notification.email.EmailService;
 import com.yesko.notification.email.EmailService;
 import com.yesko.notification.kafka.order.OrderConfirmation;
 import com.yesko.notification.kafka.payment.PaymentConfirmation;
@@ -45,6 +46,9 @@ public class NotificationConsumer {
 
     @KafkaListener(topics = "order-topic")
     public void consumerOrderSuccessNotification(OrderConfirmation confirmation) {
+        /*
+        Я бу дзу  дсзд д здадвд д даувд д дд здузадздаз дзд дз дд
+         */
         log.info(String.format("Consuming the message from payment-topic Topic:: %s", confirmation));
         repository.save(
                 Notification.builder()

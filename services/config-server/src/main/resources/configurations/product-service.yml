@@ -3,9 +3,9 @@ spring:
     change-log: db/main-data.xml
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/product
+    url: jdbc:postgresql://localhost:5442/product
     username: postgres
-    password: Qasaqayj7
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: validate

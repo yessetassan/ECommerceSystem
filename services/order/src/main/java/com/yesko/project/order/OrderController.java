@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     private final OrderService service;
     @PostMapping
-    public ResponseEntity<OrderResponse> createOrder(
+    public ResponseEntity<?> createOrder(
             @RequestBody @Valid OrderCreateRequest request
     ){
-        return ResponseEntity.ok().body(service.createOrder(request));
+        return ResponseEntity.ok().body(service.createOrder(request).getBody());
     }
-
 }

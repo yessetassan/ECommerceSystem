@@ -6,12 +6,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
+import static com.yesko.project.utils.Constanta.ORDER_TOPIC;
+
 @Configuration
 public class KafkaOrderTopicConfig {
     @Bean
     public NewTopic orderTopic(){
         return TopicBuilder
-                .name("order-topic")
+                .name(ORDER_TOPIC)
                 .build();
     }
 }
