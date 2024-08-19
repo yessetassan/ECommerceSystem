@@ -67,6 +67,7 @@ public class OrderService {
                 .build();
 
     }
+
     private Order generateOrder(OrderCreateRequest request, UserResponse user, List<PurchaseResponse> purchaseResponses) {
         BigDecimal totalAmount = purchaseResponses
                 .stream()
