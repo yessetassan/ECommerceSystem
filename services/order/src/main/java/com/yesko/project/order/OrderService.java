@@ -57,7 +57,6 @@ public class OrderService {
         orderProducer.sendOrderConfirmation(createOrderConfirmation(order, user,purchaseResponses));
         return ResponseEntity.ok().body(mapper.toOrderResponse(order));
     }
-
     private OrderConfirmation createOrderConfirmation(Order order, UserResponse user, List<PurchaseResponse> purchaseResponses) {
         return OrderConfirmation.builder()
                 .orderReference(order.getReference())
