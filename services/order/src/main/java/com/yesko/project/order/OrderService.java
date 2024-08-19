@@ -65,6 +65,7 @@ public class OrderService {
                 .userResponse(user)
                 .products(purchaseResponses)
                 .build();
+
     }
     private Order generateOrder(OrderCreateRequest request, UserResponse user, List<PurchaseResponse> purchaseResponses) {
         BigDecimal totalAmount = purchaseResponses
