@@ -1,5 +1,7 @@
 version: "3.0"
 services:
+  
+  # Postgres
   user_db:
     image: 'postgres:13.1-alpine'
     ports:
@@ -27,6 +29,15 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=product
+  
+  # Redis
+  product_redis:
+    image: redis:7
+    container_name: product_redis-cache
+    ports:
+      - "6390:6379"
+        
+  # Mongo
   notification_db:
     image: mongo:latest
     container_name: mongo_container
@@ -62,6 +73,8 @@ services:
     container_name: zipkin
     ports:
       - "9411:9411"
+        
+        
 
 volumes:
   mongo_data:
