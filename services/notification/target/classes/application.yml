@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: notification-service
+  config:
+    import: optional:configserver:http://localhost:88878
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: orderGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.type.mapping: orderConfirmation:com.yesko.notification.kafka.order.OrderConfirmation
+  data:
+    mongodb:
+      authentication-database: admin
+      username: mongo
+      password: mongo
+      database: notification
+      port: 27017
+      host: localhost
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: yesset.assan@gmail.com
+    password: tnvqyiriqnefkzwt
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+server:
+  port: 8040
