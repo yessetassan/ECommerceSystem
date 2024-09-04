@@ -19,6 +19,7 @@ spring:
     username: postgres
     password: postgres
     url: jdbc:postgresql://localhost:5440/user
+
 jwt:
   secret: 56e4rg64re654g65fg4rev6
   lifetime: 1m
@@ -28,4 +29,4 @@ springdoc:
     disable-swagger-default-url: true
 
 server:
-  port: 8099
+  port: 8090
