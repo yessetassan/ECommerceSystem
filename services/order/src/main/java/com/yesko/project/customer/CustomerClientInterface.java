@@ -1,6 +1,7 @@
 package com.yesko.project.customer;
 
 
+import com.yesko.project.dto.customer.UserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

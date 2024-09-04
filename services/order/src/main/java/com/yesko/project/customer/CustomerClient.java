@@ -44,7 +44,7 @@ public class CustomerClient {
             );
             return responseEntity.getBody();
         }catch (Exception e) {
-            throw new BusinessException("Пройзошла ошибка с токеном ::" + token);
+            throw new BusinessException("Пройзошла ошибка с токеном: " + token);
         }
     }
 }

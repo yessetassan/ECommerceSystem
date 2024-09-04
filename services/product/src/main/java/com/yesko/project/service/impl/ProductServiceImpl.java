@@ -2,14 +2,11 @@ package com.yesko.project.service.impl;
 
 import com.yesko.project.dto.product.*;
 import com.yesko.project.exception.ProductPurchaseException;
-import com.yesko.project.handler.AppError;
 import com.yesko.project.product.ProductRepository;
 import com.yesko.project.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +14,16 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper mapper;
 
     @Override
+    @CacheEvict(value = "products", key = "#request.id")
     public ProductResponse createOrUpdateProduct(ProductCreateRequest request) {
         var product = mapper.toProduct(request);
         product = repository.save(product);
@@ -35,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Cacheable(value = "products", key = "#id")
     public ProductResponse findById(Integer id) {
         return repository.findById(id)
                 .map(mapper::toProductResponse)
@@ -42,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Cacheable(value = "products")
     public List<ProductResponse> findAll() {
         return repository.findAll()
                 .stream()
@@ -51,6 +61,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "products", allEntries = true)
     public List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request) {
         var productsId = request
                 .stream()

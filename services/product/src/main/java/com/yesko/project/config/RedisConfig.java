@@ -1,0 +1,58 @@
+package com.yesko.project.config;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+
+import java.time.Duration;
+
+@Configuration
+public class RedisConfig {
+
+    @Value("${redis.host}")
+    private String redisHost;
+
+    @Value("${redis.port}")
+    private int redisPort;
+
+    @Bean
+    public LettuceConnectionFactory redisConnectionFactory() {
+        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(redisHost, redisPort);
+        return new LettuceConnectionFactory(configuration);
+    }
+
+    @Bean
+    public RedisCacheManager cacheManager() {
+        RedisCacheConfiguration cacheConfig = myDefaultCacheConfig(Duration.ofMinutes(10))
+                .disableCachingNullValues();
+
+        return RedisCacheManager.builder(redisConnectionFactory())
+                .cacheDefaults(cacheConfig)
+                .withCacheConfiguration("products", myDefaultCacheConfig(Duration.ofMinutes(5)))
+                .build();
+    }
+
+    private RedisCacheConfiguration myDefaultCacheConfig(Duration duration) {
+        return RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(duration)
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(genericJackson2JsonRedisSerializer()));
+    }
+
+    @Bean
+    public GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        // Registering the JavaTimeModule to handle Java 8 date/time types
+        objectMapper.registerModule(new JavaTimeModule());
+        // You can add more configuration to the ObjectMapper if necessary
+
+        return new GenericJackson2JsonRedisSerializer(objectMapper);
+    }
+}

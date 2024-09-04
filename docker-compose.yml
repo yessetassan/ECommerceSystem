@@ -27,6 +27,17 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=product
+  notification_db:
+    image: mongo:latest
+    container_name: mongo_container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+      MONGO_INITDB_DATABASE: notification
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -52,3 +63,7 @@ services:
     container_name: zipkin
     ports:
       - "9411:9411"
+
+
+volumes:
+  mongo_data:

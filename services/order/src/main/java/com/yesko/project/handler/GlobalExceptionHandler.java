@@ -15,24 +15,16 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {
-        var errors = new HashMap<String, String>();
-        exp.getBindingResult().getAllErrors()
-                .forEach(error -> {
-                    var fieldName = ((FieldError) error).getField();
-                    var errorMessage = error.getDefaultMessage();
-                    errors.put(fieldName, errorMessage);
-                });
-
+    public ResponseEntity<AppError> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(new ErrorResponse(errors));
+                .body(new AppError(exp.getMessage()));
     }
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<?> handle(BusinessException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(exp.getMessage());
+                .body(new AppError(exp.getMessage()));
     }
 }

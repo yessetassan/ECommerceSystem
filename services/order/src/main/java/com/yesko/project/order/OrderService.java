@@ -45,10 +45,10 @@ public class OrderService {
 
         var user = this.customerClient.findCustomerByToken(request.getToken());
         var purchaseResponses = productClient.purchaseProducts(request.getPurchaseRequests());
-        log.info("Пользователь :: {} сделал покупки::{}",  user,purchaseResponses);
+        log.info("Пользователь: {} сделал покупки: {}",  user,purchaseResponses);
 
         var order = generateOrder(request, user, purchaseResponses);
-        log.info("У пользователя:: {} заказ:: {}", user, order);
+        log.info("У пользователя: {} заказ: {}", user, order);
 
         for (PurchaseResponse purchaseResponse : purchaseResponses) {
             orderLineRepository.save(orderLineMapper.toOrderLine(purchaseResponse,order, user));

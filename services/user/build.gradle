@@ -47,8 +47,9 @@ dependencies {
 	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'redis.clients:jedis:5.1.5'
 	compileOnly "org.projectlombok:lombok:${lombokVersion}"
-
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

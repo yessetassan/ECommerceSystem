@@ -19,7 +19,7 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: orderConfirmation:com.yesko.project.kafka.OrderConfirmation
+        spring.json.type.mapping: OrderConfirmation:com.yesko.project.kafka.OrderConfirmation
 application:
   config:
     customer_url: http://localhost:8222/api/users
