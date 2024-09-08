@@ -10,9 +10,6 @@ import javax.sql.DataSource;
 @Configuration
 public class LiquibaseConfig {
 
-    @Value("${spring.datasource.url}")
-    private String dataSource;
-
     @Value("${spring.liquibase.change-log}")
     private String changeLog;
 
