@@ -18,18 +18,18 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService service;
-    @PostMapping
-    public ResponseEntity<ProductResponse> createProduct(
-            @RequestBody @Valid ProductCreateRequest request
-    ) {
-        return ResponseEntity.ok(service.createOrUpdateProduct(request));
+    @GetMapping
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 
-    @PostMapping("/purchase")
-    public ResponseEntity<?> purchaseProducts(
-            @RequestBody @Valid List<ProductPurchaseRequest> request
+    @GetMapping("/search")
+    public ResponseEntity<?> search(
+            @RequestParam(name = "name", required = false, defaultValue = "") String name,
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "size", required = false,defaultValue = "10") int size
     ) {
-        return ResponseEntity.ok(service.purchaseProducts(request));
+        return ResponseEntity.ok(service.findAll(name, page, size));
     }
 
     @GetMapping("/{product-id}")
@@ -38,9 +38,25 @@ public class ProductController {
     ) {
         return ResponseEntity.ok(service.findById(productId));
     }
+    @DeleteMapping("/{product-id}")
+    public ResponseEntity<?> deleteById(
+            @PathVariable("product-id") Integer productId
+    ) {
+        service.deleteById(productId);
+        return ResponseEntity.noContent().build();
+    }
 
-    @GetMapping
-    public ResponseEntity<?> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    @PostMapping
+    public ResponseEntity<ProductResponse> createProduct(
+            @RequestBody @Valid ProductCreateRequest request
+    ) {
+        return ResponseEntity.ok(service.createProduct(request));
+    }
+
+    @PostMapping("/purchase")
+    public ResponseEntity<?> purchaseProducts(
+            @RequestBody @Valid List<ProductPurchaseRequest> request
+    ) {
+        return ResponseEntity.ok(service.purchaseProducts(request));
     }
 }

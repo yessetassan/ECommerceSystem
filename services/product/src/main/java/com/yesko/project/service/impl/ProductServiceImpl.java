@@ -7,24 +7,18 @@ import com.yesko.project.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,18 +30,37 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @CacheEvict(value = "products", key = "#request.id")
-    public ProductResponse createOrUpdateProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateRequest request) {
         var product = mapper.toProduct(request);
         product = repository.save(product);
         return mapper.toProductResponse(product);
     }
 
     @Override
+    public Page<ProductResponse> findAll(String name, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findByNameContainingIgnoreCase(name, pageable).map(mapper::toProductResponse);
+    }
+
+    @Override
     @Cacheable(value = "products", key = "#id")
     public ProductResponse findById(Integer id) {
-        return repository.findById(id)
+        ProductResponse response = repository.findById(id)
                 .map(mapper::toProductResponse)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with ID:: " + id));
+        log.debug("Cache value type: {}", response.getClass().getName());
+        return response;
+    }
+
+    @Override
+    public ProductResponse updateById(Integer id, ProductResponse productResponse) {
+        return null;
+    }
+
+    @Override
+    @CacheEvict(value = "products", allEntries = true)
+    public void deleteById(Integer id) {
+        repository.deleteById(id);
     }
 
     @Override
