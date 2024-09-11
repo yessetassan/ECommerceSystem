@@ -36,6 +36,7 @@ public class ProductController {
     ) {
         return ResponseEntity.ok(service.findById(productId));
     }
+
     @DeleteMapping("/{product-id}")
     public ResponseEntity<?> deleteById(
             @PathVariable("product-id") Integer productId
