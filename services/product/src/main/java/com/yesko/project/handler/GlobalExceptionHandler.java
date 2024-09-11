@@ -16,31 +16,23 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProductPurchaseException.class)
-    public ResponseEntity<String> handle(ProductPurchaseException exp) {
+    public ResponseEntity<?> handle(ProductPurchaseException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(exp.getMessage());
+                .body(new AppError(exp.getMessage()));
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handle(EntityNotFoundException exp) {
+    public ResponseEntity<?> handle(EntityNotFoundException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(exp.getMessage());
+                .body(new AppError(exp.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {
-        var errors = new HashMap<String, String>();
-        exp.getBindingResult().getAllErrors()
-                .forEach(error -> {
-                    var fieldName = ((FieldError) error).getField();
-                    var errorMessage = error.getDefaultMessage();
-                    errors.put(fieldName, errorMessage);
-                });
-
+    public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException exp) {
         return ResponseEntity
                 .status(BAD_REQUEST)
-                .body(new ErrorResponse(errors));
+                .body(new AppError(exp.getMessage()));
     }
 }

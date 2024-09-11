@@ -1,13 +1,11 @@
-package com.yesko.project.product;
-import com.yesko.project.category.Category;
+package com.yesko.project.entity;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @AllArgsConstructor

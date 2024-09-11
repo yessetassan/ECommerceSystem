@@ -2,7 +2,7 @@ package com.yesko.project.service.impl;
 
 import com.yesko.project.dto.product.*;
 import com.yesko.project.exception.ProductPurchaseException;
-import com.yesko.project.product.ProductRepository;
+import com.yesko.project.repo.ProductRepository;
 import com.yesko.project.service.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

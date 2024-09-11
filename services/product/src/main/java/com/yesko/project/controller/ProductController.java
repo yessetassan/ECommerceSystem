@@ -1,15 +1,13 @@
-package com.yesko.project.product;
+package com.yesko.project.controller;
 
 import com.yesko.project.dto.product.ProductCreateRequest;
 import com.yesko.project.dto.product.ProductPurchaseRequest;
-import com.yesko.project.dto.product.ProductPurchaseResponse;
 import com.yesko.project.dto.product.ProductResponse;
 import com.yesko.project.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

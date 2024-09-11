@@ -1,6 +1,5 @@
-package com.yesko.project.category;
+package com.yesko.project.entity;
 
-import com.yesko.project.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 

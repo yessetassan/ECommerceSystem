@@ -1,6 +1,6 @@
 package com.yesko.project.dto.category;
 
-import com.yesko.project.category.Category;
+import com.yesko.project.entity.Category;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,8 +1,8 @@
 package com.yesko.project.dto.product;
 
-import com.yesko.project.category.Category;
+import com.yesko.project.entity.Category;
 import com.yesko.project.dto.category.CategoryMapper;
-import com.yesko.project.product.Product;
+import com.yesko.project.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
