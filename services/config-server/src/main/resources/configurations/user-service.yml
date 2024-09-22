@@ -18,15 +18,25 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
-    url: jdbc:postgresql://localhost:5440/user
+    url: jdbc:postgresql://localhost:5450/user
+redis:
+  host: localhost
+  port: 6379
 
-jwt:
-  secret: 56e4rg64re654g65fg4rev6
-  lifetime: 1m
 
 springdoc:
   swagger-ui:
-    disable-swagger-default-url: true
-
+    path: /user-documentation
+    tryItOutEnabled: true
+    filter: true
+  api-docs:
+    enabled: true
+    path: /user-docs
+  openapi:
+    info:
+      title: Custom API Documentation Title # Custom title for your API docs
+      description: This is the custom description of your API.
+      version: 1.0.0
 server:
-  port: 8090
+  port: 8099
+

@@ -1,7 +1,6 @@
 package com.yesko.user.dto.user;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;

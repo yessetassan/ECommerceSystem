@@ -1,27 +1,21 @@
 package com.yesko.user.service;
 
 import com.yesko.user.dto.address.AddressMapper;
-import com.yesko.user.dto.user.*;
-import com.yesko.user.entity.Role;
-import com.yesko.user.exceptions.AppError;
+import com.yesko.user.dto.user.JwtRequest;
+import com.yesko.user.dto.user.JwtResponse;
+import com.yesko.user.dto.user.UserCreateRequest;
+import com.yesko.user.dto.user.UserMapper;
 import com.yesko.user.handler.Response;
-import com.yesko.user.repo.AddressRepo;
 import com.yesko.user.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.w3c.dom.html.HTMLDocument;
-
-import static com.yesko.user.utils.Constrains.CUSTOMER_ROLE_ID;
 
 
 @Service
@@ -39,7 +33,7 @@ public class AuthService {
     public ResponseEntity<?> createNewUser(UserCreateRequest request) throws Exception {
         try {
             if (userService.findByUsername(request.getUsername()).isPresent()) {
-                return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Пользователь с указанным именем уже существует..."), HttpStatus.BAD_GATEWAY);
+                return ResponseEntity.badRequest().body(new Response("Пользователь с указанным именем уже существует..."));
             }
             userService.createNewUser(request);
             return ResponseEntity.ok().body(new Response("Успешно создался новый пользователь..."));
@@ -53,7 +47,7 @@ public class AuthService {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), "Неправильный логин или пароль"), HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.badRequest().body(new Response("Неправильный логин или пароль"));
         }
         UserDetails userDetails = userService.loadUserByUsername(request.getUsername());
         String token = jwtTokenUtils.generateToken(userDetails);

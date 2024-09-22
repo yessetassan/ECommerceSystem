@@ -6,4 +6,5 @@
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
     <include file="/db/changelog/20240803_001_add_all_entities.sql" relativeToChangelogFile="false"/>
     <include file="/db/changelog/20240803_002_add_data.sql" relativeToChangelogFile="false"/>
+    <include file="/db/changelog/20240919_001_add_admin.sql" relativeToChangelogFile="false"/>
 </databaseChangeLog>

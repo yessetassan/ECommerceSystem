@@ -1,8 +1,10 @@
 package com.yesko.user.dto.user;
 
 import com.yesko.user.dto.address.AddressCreateRequest;
-import jakarta.validation.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;

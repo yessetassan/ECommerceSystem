@@ -1,7 +1,8 @@
 package com.yesko.user.dto.address;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;

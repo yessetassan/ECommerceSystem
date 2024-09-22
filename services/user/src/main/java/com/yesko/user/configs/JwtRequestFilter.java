@@ -1,7 +1,8 @@
 package com.yesko.user.configs;
 
 import com.yesko.user.utils.JwtTokenUtils;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -10,10 +11,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.io.IOException;
 import java.util.stream.Collectors;
 
@@ -39,7 +41,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } catch (SignatureException e) {
                 log.info("Подпись неправильная");
             }catch (Exception e) {
-                log.info("Coco");
+                log.info("Токен неправильный");
             }
         }
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

@@ -7,13 +7,13 @@ import com.yesko.user.dto.user.UserMapper;
 import com.yesko.user.dto.user.UserResponse;
 import com.yesko.user.entity.Role;
 import com.yesko.user.entity.User;
-import com.yesko.user.exceptions.AppError;
+import com.yesko.user.handler.exception.BusinessException;
+import com.yesko.user.handler.exception.ErrorResponseException;
 import com.yesko.user.handler.Response;
 import com.yesko.user.repo.UserRepo;
 import com.yesko.user.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -94,18 +94,19 @@ public class UserService implements UserServiceImpl, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if(this.repo.findByUsername(username).isEmpty()){
+            throw new UsernameNotFoundException("Пользователь не существует с таким именем...");
+        }
         return this.repo.findByUsername(username).get();
     }
 
     public ResponseEntity<?> passwordChange(PasswordChangeRequest request) {
         var user = (User) this.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         if(!passwordEncoder.matches(request.getOldPassWord(), user.getPassword())) {
-            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(),
-                    "С старым парольем не совпадает"), HttpStatus.BAD_REQUEST);
+            throw new BusinessException("С старым парольем не совпадает");
         }
         if (!request.getPassword().equals(request.getPasswordAgain())) {
-            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(),
-                    "Новый пароль не совпадает"), HttpStatus.BAD_REQUEST);
+            throw new BusinessException("Новый пароль не совпадает");
         }
 
         user.setPassword(passwordEncoder.encode(request.getPassword()));
